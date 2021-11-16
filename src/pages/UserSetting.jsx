@@ -16,21 +16,10 @@ const Title = styled.h2`
 `;
 
 const UserSetting = () => {
-  const [name, setName] = useState("");
-  const [male, setMale] = useState("");
-  const [female, setFemale] = useState("");
-
   return (
     <UserSettingContainer>
       <Title>직업가치관검사</Title>
-      <UserForm
-        name={name}
-        setName={setName}
-        male={male}
-        setMale={setMale}
-        female={female}
-        setFemale={setFemale}
-      />
+      <UserForm />
     </UserSettingContainer>
   );
 };
