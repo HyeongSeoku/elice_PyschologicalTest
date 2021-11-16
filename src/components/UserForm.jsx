@@ -1,5 +1,7 @@
-import React from "react";
+import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { actionCreators } from "../store";
 
 const Form = styled.form`
   display: flex;
@@ -34,6 +36,7 @@ const SubmitBtn = styled.button`
   font-size: 15px;
   border-radius: 3px;
   background-color: white;
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   &:hover {
     background-color: #d5d9eb;
     box-shadow: rgba(213, 217, 235, 0.16) 0px 3px 6px,
@@ -42,50 +45,97 @@ const SubmitBtn = styled.button`
   }
 `;
 
+const Deactivate = styled.div`
+  width: 250px;
+  height: 30px;
+  text-align: center;
+  background-color: #b3b8c5;
+  border-radius: 5px;
+  visibility: ${(props) => (props.visible ? "hidden" : "visible")};
+`;
+
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
 `;
 
+const UserForm = ({ onSubmitState }) => {
+  const [name, setName] = useState("");
+  const [gender, setGender] = useState("");
+  const [toggle, setToggle] = useState(false);
 
-
-const UserForm = (props) => {
-  const { name, setName, male, setMale, female, setFemale } = props;
-  console.log(name, setName, male, setMale, female, setFemale);
-
-  const onNameChange = (e) =>{
-    setName(e.target.value)
+  const onNameChange = (e) => {
+    setName(e.target.value);
   };
 
-  const onMaleCheck = (e)=>{
-    setMale(e.target.value)
-  }
+  const onRadioChange = (e) => {
+    setGender(e.target.value);
+  };
 
-  const onFemaleCheck = (e)=>{
-    setFemale(e.targe.value);
-  }
-  
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onSubmitState(name, gender);
+    setName("");
+    setGender("");
+  };
+
+  //2021 - 11 -16 : 버튼 자체를 안보이게 할지 , 버튼을 눌렀을때 alert 가 뜨게할지 추후 결정
+  useEffect(() => {
+    if (name !== "" && gender !== "") {
+      //이름과 성별이 입력됐을때 버튼 활성화를 위해
+      setToggle(true); //버튼 활성화
+    } else {
+      //입력했다가 지웠을 경우 다시 비활성화
+      setToggle(false);
+    }
+  }, [gender, name, toggle]);
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Wrap>
         <Lable htmlfor="name_input">이름</Lable>
-        <NameInput id="name_input" onChange={onNameChange} />
+        <NameInput id="name_input" onChange={onNameChange} value={name} />
       </Wrap>
       <Wrap>
         <div>성별</div>
         <GenderContainer>
-          <GenderInput type="radio" name="gender" value="male" id="male" />
+          <GenderInput
+            type="radio"
+            name="gender"
+            value="male"
+            id="male"
+            onChange={onRadioChange}
+            checked={gender === "male" ? true : false}
+          />
           <Lable htmlfor="male">남성</Lable>
         </GenderContainer>
         <GenderContainer>
-          <GenderInput type="radio" name="gender" value="female" id="female" />
+          <GenderInput
+            type="radio"
+            name="gender"
+            value="female"
+            id="female"
+            onChange={onRadioChange}
+            checked={gender === "female" ? true : false}
+          />
           <Lable htmlfor="female">여성</Lable>
         </GenderContainer>
       </Wrap>
-      <SubmitBtn type="submit">검사시작</SubmitBtn>
+      <Deactivate visible={toggle}>이름과 성별을 입력해주세요</Deactivate>
+      <SubmitBtn type="submit" visible={toggle}>
+        검사시작
+      </SubmitBtn>
     </Form>
   );
 };
 
-export default UserForm;
+const mapDispatchToProps = (dispatch, ownProps) => {
+  console.log("PostData:", ownProps);
+  return {
+    onSubmitState: (name, gender) =>
+      dispatch(actionCreators.setUser({ name: name, gender: gender })),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(UserForm);
