@@ -75,9 +75,17 @@ const UserForm = ({ onSubmitState }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    onSubmitState(name, gender);
-    setName("");
-    setGender("");
+    if (name.length < 2 || name.length > 10) {
+      alert("올바른 이름을 입력해주세요.");
+      setName(""); //이름 초기화
+    } else {
+      const str = name.replace(/(\s*)/g, ""); //이름의 공백 제거
+      setName(str);
+
+      onSubmitState(name, gender); //redux를 통한 상태 변경
+      setName("");
+      setGender("");
+    }
   };
 
   //2021 - 11 -16 : 버튼 자체를 안보이게 할지 , 버튼을 눌렀을때 alert 가 뜨게할지 추후 결정
