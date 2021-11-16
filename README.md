@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+<h1>3기_직업심리검사_이름</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Elice Ai트랙 3기 레이서 김형석의 직업 심리 검사 서비스 프로젝트입니다.
 
-## Available Scripts
+</br>
 
-In the project directory, you can run:
+## 구현 사항
 
-### `yarn start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<h3 style="color:#EE5757; border-radius:5px; display:inline-block; background-color:#EDEDEB; font-weight: 600;">필수</h3>
 
-### `yarn test`
+- <h4 style="color:#EE5757; display:inline-block; font-weight: 600;">검사 시작시, 유저 설정</h4>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - [ ] **이름**을 입력할 수 있는 input form을 구현합니다.
+  - [ ] **성별**을 선택할 수 있는 input form을 구현합니다.
+  - [ ] 이름 혹은 성별을 기입하지 않거나 선택하지 않을 경우 **검사 시작 버튼이 비활성화** 되어야 합니다.
 
-### `yarn build`
+<br/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- <h4 style="color:#EE5757; display:inline-block; font-weight: 600;">검사 예시 페이지</h4>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  - [ ] 검사를 시작하기 전 앞으로의 진행 방식에 대해서 설명하는 페이지를 구현합니다.
+  - [ ] 진행 방식에 대한 검사 예제 문항이 한 문항을 화면에 표시합니다.
+  - [ ] **검사 시작 버튼**을 구현합니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `yarn eject`
+- <h4 style="color:#EE5757; display:inline-block; font-weight: 600;">검사 진행 페이지</h4>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  - [ ] **페이지 당 5개의 문항**이 보여야 합니다.
+  - [ ] 페이지 내 문항을 모두 진행하기 전까지는 **"다음" 버튼**이 **비활성화 상태**여야 합니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- <h4 style="color:#EE5757; display:inline-block; font-weight: 600;">검사 완료 페이지</h4>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  - [ ] **검사가 완료되었다는 문구**를 포함해야 하며, **검사결과에 대한 간단한 문장**을 포함해야 합니다.
 
-## Learn More
+<br/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- <h4 style="color:#EE5757; display:inline-block; font-weight: 600;">결과표 페이지</h4>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  - [ ] 유저의 기본 정보를 포함해야 합니다. (이름, 성별, 검사일)
+  - [ ] 직업가치관결과에 대하여 항목 별로 수치를 표기해야 합니다. (ex. 막대 그래프)
+  - [ ] 가치관과 관련이 높은 직업을 결과에 따라 분류하여 표기해야 합니다.
+  - [ ] "다시 검사하기" 버튼 클릭 시, 진행했던 항목에 대한 기록은 모두 초기화되어야 합니다.
 
-### Code Splitting
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<h3 style="color:#5662F6; border-radius:5px; display:inline-block; background-color:#EDEDEB; font-weight: 600;">선택</h3>
 
-### Making a Progressive Web App
+- <h4 style="color:#5662F6; display:inline-block; font-weight: 600;">검사 시작 시, 유저 설정</h4>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  - [ ] **이름을 올바르게 입력하지 않았을 경우** , 이에 대한 **안내 메세지를 출력** 합니다.
+  - [ ] **성별을 선택하지 않았을 경우** , 이에 대한 **안내 메세지를 출력**합니다.
 
-### Advanced Configuration
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- <h4 style="color:#5662F6; display:inline-block; font-weight: 600;">검사 예시 페이지</h4>
 
-### Deployment
+  - [ ] **검사 예제 문항을 진행하지 않으면** 검사 시작 버튼이 비활성화 되어야 합니다.
+  - [ ] 검사 예시 페이지부터는 **진행 표시줄(Progress bar)** 가 포함 되어야 있어야 하며, 검사 예시 페이지는 0%로 측정되어야 합니다.(진행 표시줄의 형태는 무관합니다.)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br/>
 
-### `yarn build` fails to minify
+- <h4 style="color:#5662F6; display:inline-block; font-weight: 600;">검사 진행 페이지</h4>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - [ ] 각 문항을 선택할 때 마다 **진행 표시줄과 퍼센트(%)가 갱신**되어야 합니다.
+  - [ ] "이전" 버튼을 클릭했을 때, **이전 페이지 문항에서 선택한 값이 유지된 상태**여야 합니다.
