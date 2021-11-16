@@ -60,7 +60,7 @@ const Wrap = styled.div`
   margin-bottom: 20px;
 `;
 
-const UserForm = ({ onSubmitState }) => {
+const UserForm = ({ onSubmitState, user }) => {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [toggle, setToggle] = useState(false);
@@ -79,16 +79,17 @@ const UserForm = ({ onSubmitState }) => {
       alert("올바른 이름을 입력해주세요.");
       setName(""); //이름 초기화
     } else {
-      const str = name.replace(/(\s*)/g, ""); //이름의 공백 제거
+      const str = name.replace(/(\s*)/g, ""); //이름의 공백 제거 (정규식)
       setName(str);
 
       onSubmitState(name, gender); //redux를 통한 상태 변경
+      //입력값 초기화
       setName("");
       setGender("");
     }
   };
 
-  //2021 - 11 -16 : 버튼 자체를 안보이게 할지 , 버튼을 눌렀을때 alert 가 뜨게할지 추후 결정
+  //❗[2021 - 11 -16 : 버튼 자체를 안보이게 할지 , 버튼을 눌렀을때 alert 가 뜨게할지 추후 결정]
   useEffect(() => {
     if (name !== "" && gender !== "") {
       //이름과 성별이 입력됐을때 버튼 활성화를 위해
@@ -138,6 +139,11 @@ const UserForm = ({ onSubmitState }) => {
   );
 };
 
+const mapStateToProps = (state, ownProps) => {
+  //user 데이터 받아옴
+  return { user: state.userData };
+};
+
 const mapDispatchToProps = (dispatch, ownProps) => {
   console.log("PostData:", ownProps);
   return {
@@ -146,4 +152,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm);
