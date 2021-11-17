@@ -81,7 +81,15 @@ const UpBtn = styled.button`
   }
 `;
 
-const UserTestType = ({ visible, onTestTypeSubmitState, goPrevPage, name }) => {
+const UserTestType = ({
+  visible,
+  onTestTypeSubmitState,
+  goPrevPage,
+  name,
+  gender,
+  testTypeState,
+  history,
+}) => {
   const [testType, setTestType] = useState("");
 
   const onChange = (e) => {
@@ -94,6 +102,12 @@ const UserTestType = ({ visible, onTestTypeSubmitState, goPrevPage, name }) => {
       alert("문제타입을 골라주세요😥");
     } else {
       onTestTypeSubmitState(testType);
+      if (name === "" || gender === "") {
+        alert("입력이 되지 않은 항목이 있습니다.");
+      } else {
+        console.log(name, gender, testTypeState);
+        console.log(history);
+      }
     }
   };
 
@@ -128,6 +142,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     visible: state.toggleData.testTypeToggle,
     name: state.userData.name,
+    gender: state.userData.gender,
+    testTypeState: state.userData.testType,
   };
 };
 
