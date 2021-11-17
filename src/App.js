@@ -5,6 +5,7 @@ import UserSetting from "./pages/UserSetting";
 import { useEffect } from "react";
 import api from "./apis/api";
 import { get } from "http";
+import Intro from "./pages/Intro";
 
 function App() {
   useEffect(() => {
@@ -16,7 +17,8 @@ function App() {
   }, []);
   return (
     <Routes>
-      <Route exact path="/" element={<UserSetting />} />
+      <Route exact path="/" element={<Intro />} />
+      <Route exact path="/usersetting" element={<UserSetting />} />
     </Routes>
   );
 }
