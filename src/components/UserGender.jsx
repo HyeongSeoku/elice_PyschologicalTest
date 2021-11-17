@@ -21,7 +21,7 @@ const GenderContainer = styled.div`
   animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
-  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  display: ${(props) => (props.visible ? "block" : "none")};
 `;
 
 const Form = styled.form`
@@ -53,11 +53,39 @@ const Button = styled.button`
   color: white;
 `;
 
+const NavContainer = styled.div`
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 52px 52px;
+`;
+
+const DownBtn = styled.button`
+  border: none;
+  border-radius: 3px;
+  background-color: #ffffff;
+  width: 50px;
+  height: 30px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const UpBtn = styled.button`
+  border: none;
+  border-radius: 3px;
+  background-color: #ffffff;
+  width: 50px;
+  height: 30px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
 const UserGeder = ({
   visible,
   name,
   onGenderSubmitState,
   onOffGenderToggle,
+  goPrevPage,
 }) => {
   const [gender, setGender] = useState("");
 
@@ -73,6 +101,16 @@ const UserGeder = ({
       onGenderSubmitState(gender);
       onOffGenderToggle(true);
     }
+  };
+
+  //이전 문항으로 돌아가는 버튼
+  const onPrevBtnClick = () => {
+    goPrevPage(true);
+  };
+
+  //다음 문항으로 넘어가는 버튼
+  const onNextBtnClick = () => {
+    onOffGenderToggle(true);
   };
 
   return (
@@ -99,6 +137,11 @@ const UserGeder = ({
         />
         <Button type="submit">확인✔</Button>
       </Form>
+      <NavContainer>
+        <div></div>
+        <UpBtn onClick={onPrevBtnClick}>위</UpBtn>
+        <DownBtn onClick={onNextBtnClick}>아래</DownBtn>
+      </NavContainer>
     </GenderContainer>
   );
 };
@@ -115,6 +158,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(actionCreators.setUserGender({ gender: gender })),
     onOffGenderToggle: (value) =>
       dispatch(actionCreators.testTypeToggle({ testTypeToggle: value })),
+    goPrevPage: (value) =>
+      dispatch(actionCreators.nameToggle({ nameToggle: value })),
   };
 };
 

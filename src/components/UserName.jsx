@@ -21,7 +21,7 @@ const NameContainer = styled.div`
   animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
-  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  display: ${(props) => (props.visible ? "block" : "none")};
 `;
 
 const Form = styled.form`
@@ -64,6 +64,32 @@ const Button = styled.button`
   color: white;
 `;
 
+const NavContainer = styled.div`
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 52px 52px;
+`;
+
+const DownBtn = styled.button`
+  border: none;
+  border-radius: 3px;
+  background-color: #ffffff;
+  width: 50px;
+  height: 30px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const UpBtn = styled.button`
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  pointer-events: none; //클릭 안되도록
+  background-color: rgba(0, 0, 0, 0.2);
+`;
+
 const UserName = ({ visible, onNameSubmitState, onOffNameToggle }) => {
   const [name, setName] = useState("");
 
@@ -86,6 +112,11 @@ const UserName = ({ visible, onNameSubmitState, onOffNameToggle }) => {
       onOffNameToggle(true); //이름 입력 칸 감춰지고 gender 칸 나오도록
     }
   };
+
+  //다음 문항으로 넘어가는 버튼
+  const onNextBtnClick = () => {
+    onOffNameToggle(true);
+  };
   return (
     <NameContainer visible={visible}>
       <Form onSubmit={onSubmit}>
@@ -97,6 +128,11 @@ const UserName = ({ visible, onNameSubmitState, onOffNameToggle }) => {
         />
         <Button type="submit">확인✔</Button>
       </Form>
+      <NavContainer>
+        <div></div>
+        <UpBtn>위</UpBtn>
+        <DownBtn onClick={onNextBtnClick}>아래</DownBtn>
+      </NavContainer>
     </NameContainer>
   );
 };

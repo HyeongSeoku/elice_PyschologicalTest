@@ -21,7 +21,7 @@ const TestTypeContainer = styled.div`
   animation-timing-function: ease-out;
   animation-name: ${fadeIn};
   animation-fill-mode: forwards;
-  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  display: ${(props) => (props.visible ? "block" : "none")};
 `;
 
 const Form = styled.form`
@@ -37,7 +37,9 @@ const Title = styled.strong`
   color: black;
 `;
 
-const Select = styled.select``;
+const Select = styled.select`
+  margin-bottom: 20px;
+`;
 
 const Option = styled.option``;
 
@@ -53,7 +55,33 @@ const Button = styled.button`
   color: white;
 `;
 
-const UserTestType = ({ visible, onTestTypeSubmitState, name }) => {
+const NavContainer = styled.div`
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 52px 52px;
+`;
+
+const DownBtn = styled.button`
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
+  pointer-events: none; //클릭 안되도록
+`;
+
+const UpBtn = styled.button`
+  border: none;
+  border-radius: 3px;
+  background-color: #ffffff;
+  width: 50px;
+  height: 30px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const UserTestType = ({ visible, onTestTypeSubmitState, goPrevPage, name }) => {
   const [testType, setTestType] = useState("");
 
   const onChange = (e) => {
@@ -69,6 +97,11 @@ const UserTestType = ({ visible, onTestTypeSubmitState, name }) => {
     }
   };
 
+  //이전 문항으로 돌아가는 버튼
+  const onPrevBtnClick = () => {
+    goPrevPage(true);
+  };
+
   return (
     <TestTypeContainer visible={visible}>
       <Form onSubmit={onSubmit}>
@@ -80,6 +113,11 @@ const UserTestType = ({ visible, onTestTypeSubmitState, name }) => {
         </Select>
         <Button type="submit">확인✔</Button>
       </Form>
+      <NavContainer>
+        <div></div>
+        <UpBtn onClick={onPrevBtnClick}>위</UpBtn>
+        <DownBtn>아래</DownBtn>
+      </NavContainer>
     </TestTypeContainer>
   );
 };
@@ -98,6 +136,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onTestTypeSubmitState: (testType) =>
       dispatch(actionCreators.setUserTestType({ testType: testType })),
+    goPrevPage: (value) =>
+      dispatch(actionCreators.genderToggle({ genderToggle: value })),
   };
 };
 
