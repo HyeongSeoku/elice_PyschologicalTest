@@ -15,7 +15,20 @@ const TestContainer = styled.div`
   align-items: center;
 `;
 
-const TestPage = ({ user, InitQuestionList, testData }) => {
+const SubmitBtn = styled.button`
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #014d01;
+  &:hover {
+    background-color: #017301;
+  }
+  color: white;
+`;
+
+const TestPage = ({ user, InitQuestionList, testData, pageToggle }) => {
+  console.log(pageToggle);
   //store에 데이터 저장 부분
   useEffect(() => {
     const setData = async (type) => {
@@ -43,6 +56,7 @@ const TestPage = ({ user, InitQuestionList, testData }) => {
       <h2>{user.name}님의 테스트페이지</h2>
       {/*테스트 템플릿이 들어갈 부분*/}
       <TestTemplate data={[testData[0]]} />
+      <SubmitBtn visible={pageToggle}>다음</SubmitBtn>
     </TestContainer>
   );
 };
@@ -52,6 +66,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     user: state.userData,
     testData: state.requestData.questionList,
+    pageToggle: state.toggleData.pageToggle,
   };
 };
 

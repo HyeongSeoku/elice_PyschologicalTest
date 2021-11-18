@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled, { keyframes } from "styled-components";
+import { actionCreators } from "../store";
 
 const fadeIn = keyframes`
   from{
@@ -12,9 +13,9 @@ const fadeIn = keyframes`
 `;
 
 const TemplateContainer = styled.div`
-  width: 600px;
-  height: 200px;
-  padding: 10px;
+  width: 550px;
+  height: 150px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,18 +28,21 @@ const TemplateContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const Title = styled.h2``;
+const Title = styled.h3``;
 
 const Label = styled.label`
-  width: 300px;
-  height: 40px;
+  width: 450px;
+  height: 35px;
   display: block;
-  background-color: ${(props) => (props.checked ? "#1b86bf" : "#23aaf2")};
+  background-color: ${(props) => (props.checked ? "#13628C" : "#23aaf2")};
   cursor: pointer;
   border-radius: 8px;
   margin-right: 5px;
+  margin-bottom: 10px;
+  align-items: center;
+  padding: 5px 10px;
   &:hover {
-    background-color: #1b86bf;
+    background-color: #187cb2;
   }
 `;
 
@@ -48,10 +52,21 @@ const Answer = styled.input`
 
 const AnswerContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
-const TestTemplate = ({ qData }) => {
+const AnswerTitle = styled.div`
+  font-size: 16px;
+  font-weight: 600;
+`;
+
+const AnswerDescribe = styled.div`
+  font-size: 13px;
+`;
+
+const ResultBtn = styled.div``;
+
+const TestTemplate = ({ qData, PageDone }) => {
   const { data } = qData;
   const [answer, setAnswer] = useState("");
   //화면에 보여지는 Label 체크여부를 위해 (ui)
@@ -59,7 +74,6 @@ const TestTemplate = ({ qData }) => {
   const [checked2, setChecked2] = useState(false);
 
   useEffect(() => {
-    console.log(data[0]);
     if (answer === "answer1") {
       setChecked1(true);
       setChecked2(false);
@@ -78,7 +92,8 @@ const TestTemplate = ({ qData }) => {
       <Title>{data[0].question}</Title>
       <AnswerContainer>
         <Label htmlFor="answer1" checked={checked1}>
-          {data[0].answer01}
+          <AnswerTitle>{data[0].answer01}</AnswerTitle>
+          <AnswerDescribe>{data[0].answer03}</AnswerDescribe>
           <Answer
             className="answerInput"
             type="radio"
@@ -90,7 +105,8 @@ const TestTemplate = ({ qData }) => {
           />
         </Label>
         <Label htmlFor="answer2" checked={checked2}>
-          {data[0].answer02}
+          <AnswerTitle>{data[0].answer02}</AnswerTitle>
+          <AnswerDescribe>{data[0].answer04}</AnswerDescribe>
           <Answer
             className="answerInput"
             type="radio"
@@ -111,4 +127,8 @@ const mapStateToProps = (state, ownProps) => {
   return { qData: ownProps };
 };
 
-export default connect(mapStateToProps)(TestTemplate);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  //
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestTemplate);
