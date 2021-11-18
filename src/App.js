@@ -6,21 +6,14 @@ import { useEffect } from "react";
 import api from "./apis/api";
 import { get } from "http";
 import Intro from "./pages/Intro";
-import TestPage from "./pages/TestPage";
+import TestExPage from "./pages/TestExPage";
 
 function App() {
-  useEffect(() => {
-    const getData = async () => {
-      const result = await api.getList();
-      console.log(result.data.RESULT);
-    };
-    getData();
-  }, []);
   return (
     <Routes>
       <Route exact path="/" element={<Intro />} />
       <Route exact path="/usersetting" element={<UserSetting />} />
-      <Route exact path="/testmain" element={<TestPage />} />
+      <Route exact path="/test" element={<TestExPage />} />
     </Routes>
   );
 }
