@@ -4,6 +4,20 @@ import styled, { keyframes } from "styled-components";
 import { actionCreators } from "../store";
 import { Link } from "react-router-dom";
 
+const StyledLink = styled(Link)`
+  margin-top: 30px;
+  text-decoration: none;
+  color: White;
+  display: ${(props) => (props.disvalue ? "block" : "none")};
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
 const fadeIn = keyframes`
   from{
     opacity: 0
@@ -81,6 +95,19 @@ const UpBtn = styled.button`
   }
 `;
 
+const StartTestBtn = styled.button`
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 30px;
+  background-color: #23a9f2;
+  &:hover {
+    background-color: #1b85bf;
+  }
+  color: white;
+`;
+
 const UserTestType = ({
   visible,
   onTestTypeSubmitState,
@@ -88,9 +115,9 @@ const UserTestType = ({
   name,
   gender,
   testTypeState,
-  history,
 }) => {
   const [testType, setTestType] = useState("");
+  const [display, setDisplay] = useState(false);
 
   const onChange = (e) => {
     setTestType(e.target.value);
@@ -105,8 +132,8 @@ const UserTestType = ({
       if (name === "" || gender === "") {
         alert("입력이 되지 않은 항목이 있습니다.");
       } else {
-        console.log(name, gender, testTypeState);
-        console.log(history);
+        //여기에 들어갈것
+        setDisplay(true);
       }
     }
   };
@@ -127,6 +154,14 @@ const UserTestType = ({
         </Select>
         <Button type="submit">확인✔</Button>
       </Form>
+      <StyledLink
+        disvalue={display}
+        to={{
+          pathname: `/testmain`,
+        }}
+      >
+        <StartTestBtn>테스트 시작!</StartTestBtn>
+      </StyledLink>
       <NavContainer>
         <div></div>
         <UpBtn onClick={onPrevBtnClick}>위</UpBtn>
@@ -138,7 +173,7 @@ const UserTestType = ({
 
 const mapStateToProps = (state, ownProps) => {
   //user 데이터 받아옴
-  console.log(state.userData);
+  console.log(ownProps);
   return {
     visible: state.toggleData.testTypeToggle,
     name: state.userData.name,
