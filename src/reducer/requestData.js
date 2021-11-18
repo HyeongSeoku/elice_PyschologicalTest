@@ -4,7 +4,18 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 export const dataInit = createAction("DATA_INIT");
 
 const initState = {
-  questionList: [],
+  questionList: [
+    {
+      question: "두 개 가치 중에 자신에게 더 중요한 가치를 선택하세요.",
+      answer01: "첫번째 질문",
+      answer02: "두번째 질문",
+      answer03: "첫번째 질문 세부 설명",
+      answer04: "두번째 질문 세부 설명",
+      answerScore01: 1,
+      answerScore02: 2,
+      qitemNo: 0,
+    },
+  ],
 };
 
 //sub reducer
