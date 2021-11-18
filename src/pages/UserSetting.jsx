@@ -5,6 +5,8 @@ import UserGender from "../components/UserGender";
 import UserName from "../components/UserName";
 import UserTestType from "../components/UserTestType";
 
+//유저 정보를 입력받을 페이지
+
 //animation 부분
 const fadeIn = keyframes`
   from{

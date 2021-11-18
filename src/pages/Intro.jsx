@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { actionCreators } from "../store";
 
+// 테스트에 대한 간단한 설명을 나타낼 페이지 (사용자에게 가장 먼저 보여짐)
+
 const IntroContainer = styled.div`
   width: 100vw;
   height: 100vh;
