@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import api from "./apis/api";
 import { get } from "http";
 import Intro from "./pages/Intro";
+import TestPage from "./pages/TestPage";
 
 function App() {
   useEffect(() => {
@@ -19,6 +20,7 @@ function App() {
     <Routes>
       <Route exact path="/" element={<Intro />} />
       <Route exact path="/usersetting" element={<UserSetting />} />
+      <Route exact path="/testmain" element={<TestPage />} />
     </Routes>
   );
 }
