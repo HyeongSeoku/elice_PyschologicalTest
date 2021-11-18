@@ -22,8 +22,9 @@ const axiosGet = async (url) => {
 };
 
 const api = {
-  getList: async () => {
-    return axiosGet(`${TEST_LIST_END_POINT}?apikey=${API_KEY}&q=6`);
+  getList: async (type) => {
+    //설문 코드에 따라서 값 다르게 받기 위해 type 매개변수 추가
+    return axiosGet(`${TEST_LIST_END_POINT}?apikey=${API_KEY}&q=${type}`);
   },
   getResult: async () => {
     return axiosGet(`${TEST_RESULT_END_POINT}?apikey=${API_KEY}&qestrnSeq=`);
