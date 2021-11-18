@@ -9,15 +9,16 @@ const initState = {
 
 //sub reducer
 const requestData_reducer = createReducer(initState, {
-  [dataInit]: (state, action) => {
-    state.push({
-      question: action.question,
-      answer01: action.answer01,
-      answer02: action.answer02,
-      answer03: action.answer03,
-      answer04: action.answer04,
-      answerScore01: action.answerScore01,
-      answerScore02: action.answerScore02,
+  [dataInit]: (state, { payload }) => {
+    state.questionList.push({
+      question: payload.question,
+      answer01: payload.answer01,
+      answer02: payload.answer02,
+      answer03: payload.answer03,
+      answer04: payload.answer04,
+      answerScore01: payload.answerScore01,
+      answerScore02: payload.answerScore02,
+      qitemNo: payload.qitemNo,
     });
   },
 });

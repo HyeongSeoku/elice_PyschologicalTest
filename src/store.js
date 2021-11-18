@@ -31,6 +31,8 @@ export const actionCreators = {
   nameToggle,
   genderToggle,
   testTypeToggle,
+  //설문
+  dataInit,
 };
 
 store.subscribe(() => console.log("상태변경:", store.getState()));
