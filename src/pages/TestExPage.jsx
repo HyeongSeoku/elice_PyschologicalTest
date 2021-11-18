@@ -2,9 +2,20 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import api from "../apis/api";
+import TestTemplate from "../components/TestTemplate";
 import { actionCreators } from "../store";
 
-const TestPage = ({ user, InitQuestionList }) => {
+//테스트 시작 안내 페이지
+
+const TestContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  justify-content: center;
+  align-items: center;
+`;
+
+const TestPage = ({ user, InitQuestionList, testData }) => {
   //store에 데이터 저장 부분
   useEffect(() => {
     const setData = async (type) => {
@@ -28,14 +39,16 @@ const TestPage = ({ user, InitQuestionList }) => {
   }, []); //첫 랜더링시 한번만 실행되도록
 
   return (
-    <>
-      <h2> 테스트페이지</h2>
-    </>
+    <TestContainer>
+      <h2>{user.name}님의 테스트페이지</h2>
+      {/*테스트 템플릿이 들어갈 부분*/}
+      <TestTemplate data={[testData[0]]} />
+    </TestContainer>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+  console.log("전달받은상태:", ownProps);
   return {
     user: state.userData,
     testData: state.requestData.questionList,
