@@ -118,6 +118,7 @@ const UserTestType = ({
 }) => {
   const [testType, setTestType] = useState("");
   const [display, setDisplay] = useState(false);
+  const id = 0;
 
   const onChange = (e) => {
     setTestType(e.target.value);
@@ -157,7 +158,7 @@ const UserTestType = ({
       <StyledLink
         disvalue={display}
         to={{
-          pathname: `/testmain`,
+          pathname: `/test/`,
         }}
       >
         <StartTestBtn>테스트 시작!</StartTestBtn>
