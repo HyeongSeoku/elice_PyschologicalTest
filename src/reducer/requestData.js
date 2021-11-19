@@ -6,6 +6,7 @@ export const dataInit = createAction("DATA_INIT");
 const initState = {
   questionList: [
     {
+      pageNum: 0,
       question: "두 개 가치 중에 자신에게 더 중요한 가치를 선택하세요.",
       answer01: "첫번째 질문",
       answer02: "두번째 질문",
@@ -22,6 +23,7 @@ const initState = {
 const requestData_reducer = createReducer(initState, {
   [dataInit]: (state, { payload }) => {
     state.questionList.push({
+      pageNum: payload.pageNum,
       question: payload.question,
       answer01: payload.answer01,
       answer02: payload.answer02,
