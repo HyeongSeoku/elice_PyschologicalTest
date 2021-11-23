@@ -87,17 +87,13 @@ const TestPage = ({ user, InitQuestionList, testData, pageToggle }) => {
       curPg += 1; //페이지 증가
     }
   };
-
-  const onNextBtn = () => {
-    console.log(testData[testData.length - 1].pageNum);
-  };
-
+  console.log(testData[1]);
   return (
     <TestContainer>
       <h2>{user.name}님의 테스트페이지</h2>
       {/*테스트 템플릿이 들어갈 부분*/}
       <TestTemplate data={[testData[0]]} />
-      <StyledLink to="/testmain">
+      <StyledLink to={`/testmain/`}>
         <SubmitBtn visible={pageToggle}>다음</SubmitBtn>
       </StyledLink>
     </TestContainer>
