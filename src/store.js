@@ -11,6 +11,7 @@ import user_reducer, {
   setUserName,
   setUserGender,
   setUserTestType,
+  setAnswers,
 } from "./reducer/userData";
 
 const reducer = combineReducers({
@@ -27,6 +28,7 @@ export const actionCreators = {
   setUserName,
   setUserGender,
   setUserTestType,
+  setAnswers,
   //토글 액션
   nameToggle,
   genderToggle,
