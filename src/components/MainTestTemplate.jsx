@@ -16,6 +16,7 @@ const TemplateContainer = styled.div`
   width: 550px;
   height: 150px;
   padding: 20px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,9 +67,13 @@ const AnswerDescribe = styled.div`
 
 const ResultBtn = styled.div``;
 
-const MainTestTemplate = (props) => {
-  console.log(props);
-  const { data } = props;
+/*
+// 버튼 누를때마다 액션 변경
+How? 페이지 번호_문제번호:페이지 번호_문제번호_answer1 or answer02 
+
+*/
+const MainTestTemplate = ({ qData, setUserAnswer }) => {
+  const { data } = qData;
   const [answer, setAnswer] = useState("");
   //화면에 보여지는 Label 체크여부를 위해 (ui)
   const [checked1, setChecked1] = useState(false);
@@ -78,10 +83,13 @@ const MainTestTemplate = (props) => {
     if (answer === "answer1") {
       setChecked1(true);
       setChecked2(false);
+      setUserAnswer(`${qData.data.pageNum}_${qData.data.qitemNo}`, answer);
     } else if (answer === "answer2") {
       setChecked1(false);
       setChecked2(true);
+      setUserAnswer(`${qData.data.pageNum}_${qData.data.qitemNo}`, answer);
     }
+    console.log(answer);
   }, [answer]);
 
   const onChange = (e) => {
@@ -92,7 +100,10 @@ const MainTestTemplate = (props) => {
     <TemplateContainer>
       <Title>{data.question}</Title>
       <AnswerContainer>
-        <Label htmlFor="answer1" checked={checked1}>
+        <Label
+          htmlFor={`${qData.data.pageNum}_${qData.data.qitemNo}_answer1`}
+          checked={checked1}
+        >
           <AnswerTitle>{data.answer01}</AnswerTitle>
           <AnswerDescribe>{data.answer03}</AnswerDescribe>
           <Answer
@@ -100,12 +111,15 @@ const MainTestTemplate = (props) => {
             type="radio"
             name="answer"
             value="answer1"
-            id="answer1"
+            id={`${qData.data.pageNum}_${qData.data.qitemNo}_answer1`}
             onChange={onChange}
             checked={answer === "answer1" ? true : false}
           />
         </Label>
-        <Label htmlFor="answer2" checked={checked2}>
+        <Label
+          htmlFor={`${qData.data.pageNum}_${qData.data.qitemNo}_answer2`}
+          checked={checked2}
+        >
           <AnswerTitle>{data.answer02}</AnswerTitle>
           <AnswerDescribe>{data.answer04}</AnswerDescribe>
           <Answer
@@ -113,7 +127,7 @@ const MainTestTemplate = (props) => {
             type="radio"
             name="answer"
             value="answer2"
-            id="answer2"
+            id={`${qData.data.pageNum}_${qData.data.qitemNo}_answer2`}
             onChange={onChange}
             checked={answer === "answer2" ? true : false}
           />
@@ -130,6 +144,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   //
+  return {
+    setUserAnswer: (id, result) =>
+      dispatch(actionCreators.setAnswers({ id: id, result: result })),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainTestTemplate);
