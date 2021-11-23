@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MainTestTemplate from "../components/MainTestTemplate";
 import TestTemplate from "../components/TestTemplate";
@@ -11,6 +12,19 @@ const MainContainer = styled.div`
   padding: 30px;
   justify-content: center;
   align-items: center;
+`;
+
+const StyledLink = styled(Link)`
+  margin-top: 30px;
+  text-decoration: none;
+  color: White;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
 `;
 
 const TestListContainer = styled.div``;
@@ -51,7 +65,6 @@ const MainTestPage = ({ testData }) => {
 
   useEffect(() => {
     //nowPage 값이 변경되면 targetData도 변경
-    console.log(nowPage);
     setPageData();
   }, [nowPage]);
 
@@ -59,7 +72,6 @@ const MainTestPage = ({ testData }) => {
     const tempArr = [];
     testData.map((item) => {
       if (nowPage == item.pageNum) {
-        console.log(item);
         tempArr.push(item);
       }
     });
@@ -76,7 +88,7 @@ const MainTestPage = ({ testData }) => {
       <TestListContainer>
         {/* targetData.map((item) => () 을 targetData.map((item) => {} 으로 사용하지 않도록 주의*/}
         {targetData.map((item) => (
-          <MainTestTemplate data={item} />
+          <MainTestTemplate key={item.qitemNo} data={item} />
         ))}
       </TestListContainer>
       <BtnContainer>
