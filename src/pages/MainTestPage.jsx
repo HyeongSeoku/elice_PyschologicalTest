@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MainTestTemplate from "../components/MainTestTemplate";
+import ProgressBar from "../components/ProgressBar";
 import TestTemplate from "../components/TestTemplate";
 import { actionCreators } from "../store";
 
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   padding: 30px;
   justify-content: center;
   align-items: center;
@@ -82,6 +85,7 @@ const MainTestPage = ({ testData }) => {
   };
   return (
     <MainContainer>
+      <ProgressBar />
       <h1>
         메인<span>현재 페이지: {nowPage}</span>
       </h1>

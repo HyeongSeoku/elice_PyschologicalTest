@@ -41,7 +41,13 @@ const SubmitBtn = styled.button`
   color: white;
 `;
 
-const TestPage = ({ user, InitQuestionList, testData, pageToggle }) => {
+const TestPage = ({
+  user,
+  InitQuestionList,
+  InitAnswer,
+  testData,
+  pageToggle,
+}) => {
   //store에 데이터 저장 부분
   useEffect(() => {
     const getData = async (type) => {
@@ -50,7 +56,6 @@ const TestPage = ({ user, InitQuestionList, testData, pageToggle }) => {
       setData(RESULT); //store에 데이터 저장
     };
     getData(user.testType);
-    console.log(testData[testData.length - 1]);
   }, []); //첫 랜더링시 한번만 실행되도록
 
   //페이지 번호를 데이터에 입력해주기 위한 메소드
@@ -82,6 +87,7 @@ const TestPage = ({ user, InitQuestionList, testData, pageToggle }) => {
           array[i].answerScore02,
           array[i].qitemNo
         );
+        InitAnswer(`${curPg}_${array[i].qitemNo}`);
       }
       index += TARGET_NUM; //인덱스 증가 (다음 페이지에 들어갈 처음 인덱스번호)
       curPg += 1; //페이지 증가
@@ -124,6 +130,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           qitemNo: number,
         })
       ),
+    InitAnswer: (id) => {
+      dispatch(actionCreators.initAnswers({ id: id }));
+    },
   };
 };
 

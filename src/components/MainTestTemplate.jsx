@@ -13,10 +13,10 @@ const fadeIn = keyframes`
 `;
 
 const TemplateContainer = styled.div`
-  width: 550px;
+  width: 500px;
   height: 150px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 20px 5px;
+  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,9 @@ const TemplateContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const Title = styled.h3``;
+const Title = styled.h3`
+  margin: 0, 0, 5px, 0;
+`;
 
 const Label = styled.label`
   width: 450px;
@@ -83,13 +85,20 @@ const MainTestTemplate = ({ qData, setUserAnswer }) => {
     if (answer === "answer1") {
       setChecked1(true);
       setChecked2(false);
-      setUserAnswer(`${qData.data.pageNum}_${qData.data.qitemNo}`, answer);
+      setUserAnswer(
+        `${qData.data.pageNum}_${qData.data.qitemNo}`,
+        qData.data.qitemNo,
+        answer
+      );
     } else if (answer === "answer2") {
       setChecked1(false);
       setChecked2(true);
-      setUserAnswer(`${qData.data.pageNum}_${qData.data.qitemNo}`, answer);
+      setUserAnswer(
+        `${qData.data.pageNum}_${qData.data.qitemNo}`,
+        qData.data.qitemNo,
+        answer
+      );
     }
-    console.log(answer);
   }, [answer]);
 
   const onChange = (e) => {
@@ -138,15 +147,15 @@ const MainTestTemplate = ({ qData, setUserAnswer }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("탬플릿:", state, ownProps);
   return { qData: ownProps };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  //
   return {
-    setUserAnswer: (id, result) =>
-      dispatch(actionCreators.setAnswers({ id: id, result: result })),
+    setUserAnswer: (id, quitemNo, result) =>
+      dispatch(
+        actionCreators.setAnswers({ id: id, qitemNo: quitemNo, result: result })
+      ),
   };
 };
 
