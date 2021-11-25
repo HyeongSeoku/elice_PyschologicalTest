@@ -7,10 +7,9 @@ const ProgressContainer = styled.div`
   height: 30px;
   border: 1px solid;
   border-radius: 8px;
-  opacity: 1;
 `;
-const ProgressPercent = styled.div`
-  width: ${(props) => props.width}px;
+const ProgressPercent = styled(ProgressContainer)`
+  width: ${(props) => props.percent}%;
   background-color: blue;
 `;
 
@@ -19,7 +18,7 @@ const ProgressBar = ({ checkedData }) => {
   console.log(count);
   return (
     <ProgressContainer>
-      <ProgressPercent width={count * 14.28} />
+      <ProgressPercent percent={count * 3.57} />
     </ProgressContainer>
   );
 };
