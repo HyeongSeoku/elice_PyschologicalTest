@@ -158,7 +158,7 @@ const UserTestType = ({
       <StyledLink
         disvalue={display}
         to={{
-          pathname: `/test/`,
+          pathname: `/example/`,
         }}
       >
         <StartTestBtn>테스트 시작!</StartTestBtn>
