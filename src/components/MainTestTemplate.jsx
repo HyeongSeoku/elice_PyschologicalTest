@@ -107,7 +107,7 @@ const MainTestTemplate = ({ qData, setUserAnswer }) => {
 
   return (
     <TemplateContainer>
-      <Title>{data.question}</Title>
+      <Title>{data.qitemNo}</Title>
       <AnswerContainer>
         <Label
           htmlFor={`${qData.data.pageNum}_${qData.data.qitemNo}_answer1`}
