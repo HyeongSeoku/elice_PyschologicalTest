@@ -39,6 +39,10 @@ const SubmitBtn = styled.button`
     background-color: #017301;
   }
   color: white;
+  &:disabled {
+    background-color: #454c5a;
+    cursor: not-allowed;
+  }
 `;
 
 const TestPage = ({
@@ -47,6 +51,7 @@ const TestPage = ({
   InitAnswer,
   testData,
   pageToggle,
+  InitTestPage,
 }) => {
   //store에 데이터 저장 부분
   useEffect(() => {
@@ -93,14 +98,19 @@ const TestPage = ({
       curPg += 1; //페이지 증가
     }
   };
-  console.log(testData[1]);
   return (
     <TestContainer>
       <h2>{user.name}님의 테스트페이지</h2>
+      <h3>테스트 총 문항은 {testData.length - 1}개로 구성됩니다.</h3>
+      <div>두가지 보기 중 조금 더 가까운 쪽을 선택해주세요</div>
+      <div>
+        ❗ 페이지에 해당된 모든 문항을 완료하셔야 다음 문항으로 넘어 가실수
+        있습니다.
+      </div>
       {/*테스트 템플릿이 들어갈 부분*/}
       <TestTemplate data={[testData[0]]} />
       <StyledLink to={`/testmain/`}>
-        <SubmitBtn visible={pageToggle}>다음</SubmitBtn>
+        <SubmitBtn disabled={pageToggle[0].disable}>다음</SubmitBtn>
       </StyledLink>
     </TestContainer>
   );
@@ -133,6 +143,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     InitAnswer: (id) => {
       dispatch(actionCreators.initAnswers({ id: id }));
     },
+    InitTestPage: (pg) => dispatch(actionCreators.initPage({ page: pg })),
   };
 };
 

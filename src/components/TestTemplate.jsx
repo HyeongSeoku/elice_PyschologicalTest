@@ -1,3 +1,4 @@
+import { createAction } from "@reduxjs/toolkit";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled, { keyframes } from "styled-components";
@@ -64,9 +65,7 @@ const AnswerDescribe = styled.div`
   font-size: 13px;
 `;
 
-const ResultBtn = styled.div``;
-
-const TestTemplate = ({ qData, PageDone }) => {
+const TestTemplate = ({ qData, PageDone, DoneTestPage }) => {
   const { data } = qData;
   const [answer, setAnswer] = useState("");
   //화면에 보여지는 Label 체크여부를 위해 (ui)
@@ -77,9 +76,11 @@ const TestTemplate = ({ qData, PageDone }) => {
     if (answer === "answer1") {
       setChecked1(true);
       setChecked2(false);
+      DoneTestPage("0", false);
     } else if (answer === "answer2") {
       setChecked1(false);
       setChecked2(true);
+      DoneTestPage("0", false);
     }
   }, [answer]);
 
@@ -123,12 +124,15 @@ const TestTemplate = ({ qData, PageDone }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("탬플릿:", state, ownProps);
   return { qData: ownProps };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   //
+  return {
+    DoneTestPage: (pg, value) =>
+      dispatch(actionCreators.pageToggle({ page: pg, disable: value })),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestTemplate);
