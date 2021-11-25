@@ -6,6 +6,8 @@ import toggle_reducer, {
   nameToggle,
   genderToggle,
   testTypeToggle,
+  pageToggle,
+  initPage,
 } from "./reducer/toggleInput";
 import user_reducer, {
   setUserName,
@@ -35,10 +37,12 @@ export const actionCreators = {
   nameToggle,
   genderToggle,
   testTypeToggle,
+  pageToggle,
+  initPage,
   //설문
   dataInit,
 };
 
-store.subscribe(() => console.log("상태변경:", store.getState()));
+//store.subscribe(() => console.log("상태변경:", store.getState()));
 
 export default store;
