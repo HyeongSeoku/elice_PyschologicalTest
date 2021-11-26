@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const ProgressContainer = styled.div`
   width: 400px;
-  height: 30px;
+  height: 20px;
   border: 1px solid;
   border-radius: 8px;
 `;
@@ -19,6 +19,9 @@ const ProgressBar = ({ checkedData }) => {
   return (
     <ProgressContainer>
       <ProgressPercent percent={count * 3.57} />
+      <div>
+        {count}/{checkedData.length - 1}
+      </div>
     </ProgressContainer>
   );
 };
