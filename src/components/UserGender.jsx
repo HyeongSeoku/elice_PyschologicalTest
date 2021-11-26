@@ -97,8 +97,11 @@ const UserGeder = ({
     e.preventDefault();
     if (gender === "") {
       alert("성별을 입력해주세요😥");
+    } else if (gender === "male") {
+      onGenderSubmitState(100323);
+      onOffGenderToggle(true);
     } else {
-      onGenderSubmitState(gender);
+      onGenderSubmitState(100324);
       onOffGenderToggle(true);
     }
   };
