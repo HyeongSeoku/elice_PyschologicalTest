@@ -118,7 +118,6 @@ const UserTestType = ({
 }) => {
   const [testType, setTestType] = useState("");
   const [display, setDisplay] = useState(false);
-  const id = 0;
 
   const onChange = (e) => {
     setTestType(e.target.value);
@@ -129,7 +128,7 @@ const UserTestType = ({
     if (testType === "") {
       alert("문제타입을 골라주세요😥");
     } else {
-      onTestTypeSubmitState(testType);
+      onTestTypeSubmitState(testType, Date.now());
       if (name === "" || gender === "") {
         alert("입력이 되지 않은 항목이 있습니다.");
       } else {
@@ -186,8 +185,13 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   console.log("PostData:", ownProps);
   return {
-    onTestTypeSubmitState: (testType) =>
-      dispatch(actionCreators.setUserTestType({ testType: testType })),
+    onTestTypeSubmitState: (testType, startDtm) =>
+      dispatch(
+        actionCreators.setUserTestType({
+          testType: testType,
+          startDtm: startDtm,
+        })
+      ),
     goPrevPage: (value) =>
       dispatch(actionCreators.genderToggle({ genderToggle: value })),
   };
