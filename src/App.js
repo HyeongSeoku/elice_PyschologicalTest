@@ -7,6 +7,7 @@ import api from "./apis/api";
 import Intro from "./pages/Intro";
 import TestExPage from "./pages/TestExPage";
 import MainTestPage from "./pages/MainTestPage";
+import ResultPage from "./pages/ResultPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route exact path="/usersetting" element={<UserSetting />} />
       <Route exact path="/example" element={<TestExPage />} />
       <Route exact path="/testmain" element={<MainTestPage />} />
+      <Route exact path="/result" element={<ResultPage />} />
     </Routes>
   );
 }
