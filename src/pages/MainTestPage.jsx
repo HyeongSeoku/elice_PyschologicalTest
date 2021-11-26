@@ -62,9 +62,17 @@ const SubmitBtn = styled.button`
   color: white;
 `;
 
-const MainTestPage = ({ testData }) => {
+const MainTestPage = ({ testData, InitPage }) => {
+  testData.map((i) => console.log(i.pageNum));
+  const uniquePage = new Set(testData.map((i) => i.pageNum));
+
   const [nowPage, setNowPage] = useState(1); //현재페이지 설정 (default = 1)
   const [targetData, setTargetData] = useState([]); //store에서 받아온 데이터를 nowPage 값에 따라 로드시키기 위한 state
+
+  useEffect(() => {
+    //페이지 disable 초기화
+    uniquePage.forEach((i) => InitPage(i));
+  }, []);
 
   useEffect(() => {
     //nowPage 값이 변경되면 targetData도 변경
@@ -96,6 +104,9 @@ const MainTestPage = ({ testData }) => {
         ))}
       </TestListContainer>
       <BtnContainer>
+        <StyledLink to="/result">
+          <SubmitBtn>확인</SubmitBtn>
+        </StyledLink>
         <PageBtnContainer>
           {/*추후 동적 할당 필요 */}
           <PageBtn value="1" onClick={onChangePage}>
@@ -117,7 +128,6 @@ const MainTestPage = ({ testData }) => {
             6
           </PageBtn>
         </PageBtnContainer>
-        <SubmitBtn>확인</SubmitBtn>
       </BtnContainer>
     </MainContainer>
   );
@@ -127,6 +137,10 @@ const mapStateToProps = (state, ownProps) => {
   return { testData: state.requestData.questionList };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {};
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    InitPage: (id) => dispatch(actionCreators.initPage({ id: id })),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainTestPage);
