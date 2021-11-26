@@ -74,35 +74,48 @@ const ResultBtn = styled.div``;
 How? 페이지 번호_문제번호:페이지 번호_문제번호_answer1 or answer02 
 
 */
-const MainTestTemplate = ({ qData, setUserAnswer }) => {
+const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
   const { data } = qData;
-  const [answer, setAnswer] = useState("");
+  const targetId = ResultAnswers.filter(
+    (ele) => ele.id === `${data.pageNum}_${data.qitemNo}`
+  );
   //화면에 보여지는 Label 체크여부를 위해 (ui)
   const [checked1, setChecked1] = useState(false);
   const [checked2, setChecked2] = useState(false);
 
+  //페이지 이동시에도 체크 유지되게 하기 위해서
   useEffect(() => {
-    if (answer === "answer1") {
+    if (targetId[0].result === "answer1") {
+      setChecked1(true);
+      setChecked2(false);
+    } else if (targetId[0].result === "answer2") {
+      setChecked1(false);
+      setChecked2(true);
+    }
+  }, []);
+
+  const onChange = (e) => {
+    if (e.target.value === "answer1") {
       setChecked1(true);
       setChecked2(false);
       setUserAnswer(
-        `${qData.data.pageNum}_${qData.data.qitemNo}`,
-        qData.data.qitemNo,
-        answer
+        `${data.pageNum}_${data.qitemNo}`,
+        data.qitemNo,
+        e.target.value,
+        data.pageNum,
+        data.answerScore01
       );
-    } else if (answer === "answer2") {
+    } else {
+      setUserAnswer(
+        `${data.pageNum}_${data.qitemNo}`,
+        data.qitemNo,
+        e.target.value,
+        data.pageNum,
+        data.answerScore02
+      );
       setChecked1(false);
       setChecked2(true);
-      setUserAnswer(
-        `${qData.data.pageNum}_${qData.data.qitemNo}`,
-        qData.data.qitemNo,
-        answer
-      );
     }
-  }, [answer]);
-
-  const onChange = (e) => {
-    setAnswer(e.target.value);
   };
 
   return (
@@ -122,7 +135,7 @@ const MainTestTemplate = ({ qData, setUserAnswer }) => {
             value="answer1"
             id={`${qData.data.pageNum}_${qData.data.qitemNo}_answer1`}
             onChange={onChange}
-            checked={answer === "answer1" ? true : false}
+            checked={targetId[0].result === "answer1" ? true : false}
           />
         </Label>
         <Label
@@ -138,7 +151,7 @@ const MainTestTemplate = ({ qData, setUserAnswer }) => {
             value="answer2"
             id={`${qData.data.pageNum}_${qData.data.qitemNo}_answer2`}
             onChange={onChange}
-            checked={answer === "answer2" ? true : false}
+            checked={targetId[0].result === "answer2" ? true : false}
           />
         </Label>
       </AnswerContainer>
@@ -147,14 +160,20 @@ const MainTestTemplate = ({ qData, setUserAnswer }) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  return { qData: ownProps };
+  return { qData: ownProps, ResultAnswers: state.userData.answers };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setUserAnswer: (id, quitemNo, result) =>
+    setUserAnswer: (id, quitemNo, result, pageNo, answerScore) =>
       dispatch(
-        actionCreators.setAnswers({ id: id, qitemNo: quitemNo, result: result })
+        actionCreators.setAnswers({
+          id: id,
+          qitemNo: quitemNo,
+          result: result,
+          pageNo: pageNo,
+          answerScore: answerScore,
+        })
       ),
   };
 };
