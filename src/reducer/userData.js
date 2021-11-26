@@ -12,6 +12,7 @@ const initState = {
   name: "",
   gender: "",
   testType: "",
+  startDtm: "",
   answers: [{ id: "0", result: "" }],
 };
 
@@ -22,6 +23,7 @@ const user_reducer = createReducer(initState, {
       name: payload.name,
       gender: state.gender,
       testType: state.testType,
+      startDtm: state.startDtm,
       answers: state.answers,
     };
   },
@@ -30,6 +32,7 @@ const user_reducer = createReducer(initState, {
       name: state.name,
       gender: payload.gender,
       testType: state.testType,
+      startDtm: state.startDtm,
       answers: state.answers,
     };
   },
@@ -38,6 +41,7 @@ const user_reducer = createReducer(initState, {
       name: state.name,
       gender: state.gender,
       testType: payload.testType,
+      startDtm: payload.startDtm,
       answers: state.answers,
     };
   },
@@ -49,13 +53,20 @@ const user_reducer = createReducer(initState, {
     const newAnswers = state.answers.map((item) => {
       //id 값이 존재하면 해당 값 수정
       return item.id === payload.id
-        ? { ...item, qitemNo: payload.qitemNo, result: payload.result }
+        ? {
+            ...item,
+            qitemNo: payload.qitemNo,
+            result: payload.result,
+            pageNo: payload.pageNo,
+            answerScore: payload.answerScore,
+          }
         : item;
     });
     return {
       name: state.name,
       gender: state.gender,
       testType: state.testType,
+      startDtm: state.startDtm,
       answers: newAnswers,
     };
   },
@@ -63,6 +74,7 @@ const user_reducer = createReducer(initState, {
     name: "",
     gender: "",
     testType: "",
+    startDtm: "",
     answers: [],
   }),
 });
