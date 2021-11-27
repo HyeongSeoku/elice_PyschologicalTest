@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { actionCreators } from "../store";
 
 // 테스트에 대한 간단한 설명을 나타낼 페이지 (사용자에게 가장 먼저 보여짐)
 
@@ -44,10 +42,7 @@ const EnterBtn = styled.button`
   }
 `;
 
-const Intro = ({ onStartSetting }) => {
-  const onClick = () => {
-    onStartSetting(true);
-  };
+const Intro = () => {
   return (
     <IntroContainer>
       <IntroTitle>📝진로 심리 검사 테스트</IntroTitle>
@@ -56,17 +51,10 @@ const Intro = ({ onStartSetting }) => {
         <div>준비가 되셨다면 검사 시작 버튼을 눌러주세요👍</div>
       </IntroSubscribe>
       <StyledLink to="/usersetting">
-        <EnterBtn onClick={onClick}>검사 시작하기</EnterBtn>
+        <EnterBtn>검사 시작하기</EnterBtn>
       </StyledLink>
     </IntroContainer>
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onStartSetting: (value) =>
-      dispatch(actionCreators.nameToggle({ nameToggle: value })),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Intro);
+export default Intro;
