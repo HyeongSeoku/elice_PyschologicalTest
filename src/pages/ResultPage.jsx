@@ -3,7 +3,7 @@ import ChartComp from "../components/Chart.jsx";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import api from "../apis/api";
+import api, { API_KEY } from "../apis/api";
 import { actionCreators } from "../store";
 import { Bar } from "react-chartjs-2";
 import { TEST_RESULT_CONSTANTS } from "../constants/standard";
@@ -45,7 +45,7 @@ const ResultPage = ({
     const postData = async () => {
       const request = await api.sendResult(
         {
-          apikey: "c15f8d16ad99a739acc9dbea7f2c5535",
+          apikey: API_KEY,
           qestrnSeq: user.testType,
           trgetSe: "100209",
           name: user.name,
