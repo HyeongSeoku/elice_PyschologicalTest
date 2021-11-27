@@ -67,13 +67,6 @@ const AnswerDescribe = styled.div`
   font-size: 13px;
 `;
 
-const ResultBtn = styled.div``;
-
-/*
-// 버튼 누를때마다 액션 변경
-How? 페이지 번호_문제번호:페이지 번호_문제번호_answer1 or answer02 
-
-*/
 const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
   const { data } = qData;
   const targetId = ResultAnswers.filter(
@@ -95,6 +88,7 @@ const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
   }, []);
 
   const onChange = (e) => {
+    // 버튼 누를때마다 액션 작동
     if (e.target.value === "answer1") {
       setChecked1(true);
       setChecked2(false);
