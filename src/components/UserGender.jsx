@@ -155,7 +155,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log("PostData:", ownProps);
   return {
     onGenderSubmitState: (gender) =>
       dispatch(actionCreators.setUserGender({ gender: gender })),

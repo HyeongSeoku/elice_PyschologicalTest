@@ -63,7 +63,6 @@ const SubmitBtn = styled.button`
 `;
 
 const MainTestPage = ({ testData, InitPage }) => {
-  testData.map((i) => console.log(i.pageNum));
   const uniquePage = new Set(testData.map((i) => i.pageNum));
 
   const [nowPage, setNowPage] = useState(1); //현재페이지 설정 (default = 1)

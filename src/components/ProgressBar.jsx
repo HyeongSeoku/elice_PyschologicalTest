@@ -15,7 +15,6 @@ const ProgressPercent = styled(ProgressContainer)`
 
 const ProgressBar = ({ checkedData }) => {
   const count = checkedData.filter((ele) => ele.result !== "").length;
-  console.log(count);
   return (
     <ProgressContainer>
       <ProgressPercent percent={count * 3.57} />

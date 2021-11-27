@@ -46,8 +46,6 @@ const UserSetting = () => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
-};
+const mapStateToProps = (state, ownProps) => {};
 
 export default connect(mapStateToProps)(UserSetting);

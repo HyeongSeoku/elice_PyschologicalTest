@@ -173,7 +173,6 @@ const UserTestType = ({
 
 const mapStateToProps = (state, ownProps) => {
   //user 데이터 받아옴
-  console.log(ownProps);
   return {
     visible: state.toggleData.testTypeToggle,
     name: state.userData.name,
@@ -183,7 +182,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log("PostData:", ownProps);
   return {
     onTestTypeSubmitState: (testType, startDtm) =>
       dispatch(

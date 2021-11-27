@@ -139,12 +139,10 @@ const UserName = ({ visible, onNameSubmitState, onOffNameToggle }) => {
 
 const mapStateToProps = (state, ownProps) => {
   //user 데이터 받아옴
-  console.log(state);
   return { visible: state.toggleData.nameToggle };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  console.log("PostData:", ownProps);
   return {
     onNameSubmitState: (name) =>
       dispatch(actionCreators.setUserName({ name: name })),
