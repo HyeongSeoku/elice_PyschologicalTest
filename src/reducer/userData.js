@@ -1,9 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 //action
-export const setUserName = createAction("SET_USER_NAME");
-export const setUserGender = createAction("SET_USER_GENDER");
-export const setUserTestType = createAction("SET_USER_TEST_TYPE");
+export const setUserData = createAction("SET_USER_DATA");
 export const setAnswers = createAction("SET_ANSWERS");
 export const initAnswers = createAction("INIT_ANSWERS");
 export const resetUser = createAction("RESET_USER"); //유저 리셋
@@ -22,34 +20,12 @@ const initState = {
 
 //sub reducer
 const user_reducer = createReducer(initState, {
-  [setUserName]: (state, { payload }) => {
+  [setUserData]: (state, { payload }) => {
     return {
       name: payload.name,
-      gender: state.gender,
-      testType: state.testType,
-      startDtm: state.startDtm,
-      answers: state.answers,
-      resultAnswers: state.resultAnswers,
-      maxAnswer: state.maxAnswer,
-    };
-  },
-  [setUserGender]: (state, { payload }) => {
-    return {
-      name: state.name,
       gender: payload.gender,
-      testType: state.testType,
-      startDtm: state.startDtm,
-      answers: state.answers,
-      resultAnswers: state.resultAnswers,
-      maxAnswer: state.maxAnswer,
-    };
-  },
-  [setUserTestType]: (state, { payload }) => {
-    return {
-      name: state.name,
-      gender: state.gender,
       testType: payload.testType,
-      startDtm: payload.startDtm,
+      startDtm: state.startDtm,
       answers: state.answers,
       resultAnswers: state.resultAnswers,
       maxAnswer: state.maxAnswer,
