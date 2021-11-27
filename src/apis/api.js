@@ -4,8 +4,10 @@ import axios from "axios";
 
 const TEST_LIST_END_POINT =
   "https://www.career.go.kr/inspct/openapi/test/questions";
-const TEST_RESULT_END_POINT =
+const POST_TEST_RESULT_END_POINT =
   "https://www.career.go.kr/inspct/openapi/test/report";
+const GET_TEST_RESULT_END_POITN =
+  "https://www.career.go.kr/inspct/api/psycho/report?";
 
 export const API_KEY = "c15f8d16ad99a739acc9dbea7f2c5535";
 
@@ -41,12 +43,10 @@ const api = {
   },
   //검사 결과 받아옴
   getResult: async (value) => {
-    return axiosGet(
-      `https://cors-anywhere.herokuapp.com/${TEST_RESULT_END_POINT}&seq=${value}`
-    );
+    return axiosGet(`${GET_TEST_RESULT_END_POITN}&seq=${value}`);
   },
   sendResult: async (data, contentType) => {
-    return axiosPost(`${TEST_RESULT_END_POINT}`, data, contentType);
+    return axiosPost(`${POST_TEST_RESULT_END_POINT}`, data, contentType);
   },
 };
 

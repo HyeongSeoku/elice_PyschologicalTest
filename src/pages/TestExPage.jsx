@@ -40,6 +40,7 @@ const SubmitBtn = styled.button`
   }
   color: white;
   &:disabled {
+    opacity: 0.7;
     background-color: #454c5a;
     cursor: not-allowed;
   }

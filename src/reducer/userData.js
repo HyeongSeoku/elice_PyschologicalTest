@@ -7,6 +7,8 @@ export const setUserTestType = createAction("SET_USER_TEST_TYPE");
 export const setAnswers = createAction("SET_ANSWERS");
 export const initAnswers = createAction("INIT_ANSWERS");
 export const resetUser = createAction("RESET_USER"); //유저 리셋
+export const resultAnswers = createAction("RESULT_ANSWERS"); //서버로부터 받은 결과
+export const maxAnswer = createAction("MAX_ANSWER");
 
 const initState = {
   name: "",
@@ -14,6 +16,8 @@ const initState = {
   testType: "",
   startDtm: "",
   answers: [{ id: "0", result: "" }],
+  resultAnswers: [],
+  maxAnswer: [],
 };
 
 //sub reducer
@@ -25,6 +29,8 @@ const user_reducer = createReducer(initState, {
       testType: state.testType,
       startDtm: state.startDtm,
       answers: state.answers,
+      resultAnswers: state.resultAnswers,
+      maxAnswer: state.maxAnswer,
     };
   },
   [setUserGender]: (state, { payload }) => {
@@ -34,6 +40,8 @@ const user_reducer = createReducer(initState, {
       testType: state.testType,
       startDtm: state.startDtm,
       answers: state.answers,
+      resultAnswers: state.resultAnswers,
+      maxAnswer: state.maxAnswer,
     };
   },
   [setUserTestType]: (state, { payload }) => {
@@ -43,6 +51,8 @@ const user_reducer = createReducer(initState, {
       testType: payload.testType,
       startDtm: payload.startDtm,
       answers: state.answers,
+      resultAnswers: state.resultAnswers,
+      maxAnswer: state.maxAnswer,
     };
   },
   [initAnswers]: (state, { payload }) => {
@@ -68,14 +78,25 @@ const user_reducer = createReducer(initState, {
       testType: state.testType,
       startDtm: state.startDtm,
       answers: newAnswers,
+      resultAnswers: state.resultAnswers,
+      maxAnswer: state.maxAnswer,
     };
   },
+  [resultAnswers]: (state, { payload }) => {
+    state.resultAnswers.push({ id: payload.id, value: payload.value });
+  },
+  [maxAnswer]: (state, { payload }) => {
+    state.maxAnswer.push({ id: payload.id, value: payload.value });
+  },
+
   [resetUser]: () => ({
     name: "",
     gender: "",
     testType: "",
     startDtm: "",
     answers: [],
+    resultAnswer: [],
+    maxAnswer: [],
   }),
 });
 

@@ -15,6 +15,8 @@ import user_reducer, {
   setUserTestType,
   initAnswers,
   setAnswers,
+  resultAnswers,
+  maxAnswer,
 } from "./reducer/userData";
 
 const reducer = combineReducers({
@@ -33,6 +35,8 @@ export const actionCreators = {
   setUserTestType,
   initAnswers,
   setAnswers,
+  resultAnswers,
+  maxAnswer,
   //토글 액션
   nameToggle,
   genderToggle,
