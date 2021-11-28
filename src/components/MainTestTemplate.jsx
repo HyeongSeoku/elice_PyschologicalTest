@@ -30,11 +30,18 @@ const TemplateContainer = styled.div`
 `;
 
 const Title = styled.h3`
+  display: inline-block;
   margin: 0, 0, 5px, 0;
 `;
 
+const SubTitle = styled.div`
+  font-size: 15px;
+  display: inline-block;
+  margin-left: 5px;
+`;
+
 const Label = styled.label`
-  width: 450px;
+  width: 150px;
   height: 35px;
   display: block;
   background-color: ${(props) => (props.checked ? "#13628C" : "#23aaf2")};
@@ -42,8 +49,10 @@ const Label = styled.label`
   border-radius: 8px;
   margin-right: 5px;
   margin-bottom: 10px;
+  justify-content: center;
   align-items: center;
   padding: 5px 10px;
+  text-align: center;
   &:hover {
     background-color: #187cb2;
   }
@@ -54,17 +63,25 @@ const Answer = styled.input`
 `;
 
 const AnswerContainer = styled.div`
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
 const AnswerTitle = styled.div`
   font-size: 16px;
   font-weight: 600;
+  display: inline-block;
 `;
 
-const AnswerDescribe = styled.div`
-  font-size: 13px;
+const HoverDiv = styled.div`
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  background-color: white;
+  margin-left: 20px;
+  border: 1px solid;
+  border-radius: 15px;
 `;
 
 const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
@@ -97,7 +114,8 @@ const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
         data.qitemNo,
         e.target.value,
         data.pageNum,
-        data.answerScore01
+        data.answerScore01,
+        true
       );
     } else {
       setUserAnswer(
@@ -105,7 +123,8 @@ const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
         data.qitemNo,
         e.target.value,
         data.pageNum,
-        data.answerScore02
+        data.answerScore02,
+        true
       );
       setChecked1(false);
       setChecked2(true);
@@ -114,14 +133,17 @@ const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
 
   return (
     <TemplateContainer>
-      <Title>{data.qitemNo}</Title>
+      <Title>
+        Q.{data.qitemNo}
+        <SubTitle>{data.question}</SubTitle>
+      </Title>
       <AnswerContainer>
         <Label
           htmlFor={`${qData.data.pageNum}_${qData.data.qitemNo}_answer1`}
           checked={checked1}
         >
           <AnswerTitle>{data.answer01}</AnswerTitle>
-          <AnswerDescribe>{data.answer03}</AnswerDescribe>
+          <HoverDiv title={data.answer03}>❓</HoverDiv>
           <Answer
             className="answerInput"
             type="radio"
@@ -137,7 +159,7 @@ const MainTestTemplate = ({ qData, setUserAnswer, ResultAnswers }) => {
           checked={checked2}
         >
           <AnswerTitle>{data.answer02}</AnswerTitle>
-          <AnswerDescribe>{data.answer04}</AnswerDescribe>
+          <HoverDiv title={data.answer04}>❓</HoverDiv>
           <Answer
             className="answerInput"
             type="radio"
@@ -159,7 +181,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setUserAnswer: (id, quitemNo, result, pageNo, answerScore) =>
+    setUserAnswer: (id, quitemNo, result, pageNo, answerScore, checked) =>
       dispatch(
         actionCreators.setAnswers({
           id: id,
@@ -167,6 +189,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           result: result,
           pageNo: pageNo,
           answerScore: answerScore,
+          checked: checked,
         })
       ),
   };

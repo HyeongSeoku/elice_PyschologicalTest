@@ -25,7 +25,7 @@ const user_reducer = createReducer(initState, {
       name: payload.name,
       gender: payload.gender,
       testType: payload.testType,
-      startDtm: state.startDtm,
+      startDtm: payload.startDtm,
       answers: state.answers,
       resultAnswers: state.resultAnswers,
       maxAnswer: state.maxAnswer,
@@ -45,6 +45,7 @@ const user_reducer = createReducer(initState, {
             result: payload.result,
             pageNo: payload.pageNo,
             answerScore: payload.answerScore,
+            checked: payload.checked,
           }
         : item;
     });

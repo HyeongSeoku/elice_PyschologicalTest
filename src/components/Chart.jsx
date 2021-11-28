@@ -68,6 +68,7 @@ const ChartComp = ({ resultAnswer, maxAnswer }) => {
       },
     ],
   };
+
   return (
     <ChartContainer>
       <ChartCard>

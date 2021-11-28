@@ -32,7 +32,7 @@ const TemplateContainer = styled.div`
 const Title = styled.h3``;
 
 const Label = styled.label`
-  width: 450px;
+  width: 150px;
   height: 35px;
   display: block;
   background-color: ${(props) => (props.checked ? "#13628C" : "#23aaf2")};
@@ -40,6 +40,7 @@ const Label = styled.label`
   border-radius: 8px;
   margin-right: 5px;
   margin-bottom: 10px;
+  justify-content: center;
   align-items: center;
   padding: 5px 10px;
   &:hover {
@@ -52,17 +53,25 @@ const Answer = styled.input`
 `;
 
 const AnswerContainer = styled.div`
+  margin-top: 10px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
 const AnswerTitle = styled.div`
+  display: inline-block;
   font-size: 16px;
   font-weight: 600;
 `;
 
-const AnswerDescribe = styled.div`
-  font-size: 13px;
+const HoverDiv = styled.div`
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  background-color: white;
+  margin-left: 20px;
+  border: 1px solid;
+  border-radius: 15px;
 `;
 
 const TestTemplate = ({ qData, PageDone, DoneTestPage }) => {
@@ -94,7 +103,7 @@ const TestTemplate = ({ qData, PageDone, DoneTestPage }) => {
       <AnswerContainer>
         <Label htmlFor="answer1" checked={checked1}>
           <AnswerTitle>{data[0].answer01}</AnswerTitle>
-          <AnswerDescribe>{data[0].answer03}</AnswerDescribe>
+          <HoverDiv title={data[0].answer03}>❓</HoverDiv>
           <Answer
             className="answerInput"
             type="radio"
@@ -107,7 +116,7 @@ const TestTemplate = ({ qData, PageDone, DoneTestPage }) => {
         </Label>
         <Label htmlFor="answer2" checked={checked2}>
           <AnswerTitle>{data[0].answer02}</AnswerTitle>
-          <AnswerDescribe>{data[0].answer04}</AnswerDescribe>
+          <HoverDiv title={data[0].answer04}>❓</HoverDiv>
           <Answer
             className="answerInput"
             type="radio"

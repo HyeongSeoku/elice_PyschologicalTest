@@ -206,7 +206,12 @@ const UserSetting = ({ user, setUsers }) => {
 
   const onClick = (e) => {
     //store에 데이터 업데이트
-    setUsers(name, storeGender, testType);
+    setUsers(
+      name,
+      storeGender,
+      testType,
+      new Date().toLocaleString("kor").slice(0, 14)
+    );
   };
 
   console.log(user);
@@ -269,12 +274,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setUsers: (nameValue, genderValue, testTypeValue) =>
+    setUsers: (nameValue, genderValue, testTypeValue, startDtmValue) =>
       dispatch(
         actionCreators.setUserData({
           name: nameValue,
           gender: genderValue,
           testType: testTypeValue,
+          startDtm: startDtmValue,
         })
       ),
   };

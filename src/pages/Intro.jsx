@@ -13,6 +13,17 @@ const IntroContainer = styled.div`
   align-items: center;
 `;
 
+const IntroBoarder = styled.div`
+  width: 700px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 8px;
+`;
+
 const IntroTitle = styled.h1``;
 
 const IntroSubscribe = styled.div``;
@@ -45,14 +56,16 @@ const EnterBtn = styled.button`
 const Intro = () => {
   return (
     <IntroContainer>
-      <IntroTitle>📝진로 심리 검사 테스트</IntroTitle>
-      <IntroSubscribe>
-        <div>간단한 검사를 통해 선호하는 직업을 알아보세요!</div>
-        <div>준비가 되셨다면 검사 시작 버튼을 눌러주세요👍</div>
-      </IntroSubscribe>
-      <StyledLink to="/usersetting">
-        <EnterBtn>검사 시작하기</EnterBtn>
-      </StyledLink>
+      <IntroBoarder>
+        <IntroTitle>📝진로 심리 검사 테스트</IntroTitle>
+        <IntroSubscribe>
+          <div>간단한 검사를 통해 선호하는 직업을 알아보세요!</div>
+          <div>준비가 되셨다면 검사 시작 버튼을 눌러주세요👍</div>
+        </IntroSubscribe>
+        <StyledLink to="/usersetting">
+          <EnterBtn>검사 시작하기</EnterBtn>
+        </StyledLink>
+      </IntroBoarder>
     </IntroContainer>
   );
 };

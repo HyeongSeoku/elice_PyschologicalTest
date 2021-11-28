@@ -17,6 +17,17 @@ const MainContainer = styled.div`
   align-items: center;
 `;
 
+const MainBoarder = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  width: 800px;
+  border-radius: 8px;
+  padding: 20px;
+`;
+
 const StyledLink = styled(Link)`
   margin-top: 30px;
   text-decoration: none;
@@ -62,11 +73,27 @@ const SubmitBtn = styled.button`
   color: white;
 `;
 
-const MainTestPage = ({ testData, InitPage }) => {
+const MainTestPage = ({ testData, InitPage, resultAnswer }) => {
   const uniquePage = new Set(testData.map((i) => i.pageNum));
 
   const [nowPage, setNowPage] = useState(1); //현재페이지 설정 (default = 1)
+  // const [buttonDisable, setButtonDisable] = useState([
+  //   {id:1,value:true},
+  //   {id:2,value:true},
+  //   {id:3,value:true},
+  //   {id:4,value:true},
+  //   {id:5,value:true},
+  //   {id:6,value:true},
+  // ]);
+
   const [targetData, setTargetData] = useState([]); //store에서 받아온 데이터를 nowPage 값에 따라 로드시키기 위한 state
+
+  const testResult = resultAnswer.filter(
+    (i) => i.pageNo === nowPage && i.checked === true
+  );
+  // if (testResult.length === 5) {
+  //   setButtonDisable(buttonDisable.filter(i=>i.id === nowPage))
+  // }
 
   useEffect(() => {
     //페이지 disable 초기화
@@ -92,48 +119,53 @@ const MainTestPage = ({ testData, InitPage }) => {
   };
   return (
     <MainContainer>
-      <ProgressBar />
-      <h1>
-        메인<span>현재 페이지: {nowPage}</span>
-      </h1>
-      <TestListContainer>
-        {/* targetData.map((item) => () 을 targetData.map((item) => {} 으로 사용하지 않도록 주의*/}
-        {targetData.map((item) => (
-          <MainTestTemplate key={item.qitemNo} data={item} />
-        ))}
-      </TestListContainer>
-      <BtnContainer>
-        <StyledLink to="/result">
-          <SubmitBtn>확인</SubmitBtn>
-        </StyledLink>
-        <PageBtnContainer>
-          {/*추후 동적 할당 필요 */}
-          <PageBtn value="1" onClick={onChangePage}>
-            1
-          </PageBtn>
-          <PageBtn value="2" onClick={onChangePage}>
-            2
-          </PageBtn>
-          <PageBtn value="3" onClick={onChangePage}>
-            3
-          </PageBtn>
-          <PageBtn value="4" onClick={onChangePage}>
-            4
-          </PageBtn>
-          <PageBtn value="5" onClick={onChangePage}>
-            5
-          </PageBtn>
-          <PageBtn value="6" onClick={onChangePage}>
-            6
-          </PageBtn>
-        </PageBtnContainer>
-      </BtnContainer>
+      <MainBoarder>
+        <ProgressBar />
+        <h1>
+          메인<span>현재 페이지: {nowPage}</span>
+        </h1>
+        <TestListContainer>
+          {/* targetData.map((item) => () 을 targetData.map((item) => {} 으로 사용하지 않도록 주의*/}
+          {targetData.map((item) => (
+            <MainTestTemplate key={item.qitemNo} data={item} />
+          ))}
+        </TestListContainer>
+        <BtnContainer>
+          <StyledLink to="/result">
+            <SubmitBtn>확인</SubmitBtn>
+          </StyledLink>
+          <PageBtnContainer>
+            {/*추후 동적 할당 필요 */}
+            <PageBtn value="1" onClick={onChangePage}>
+              1
+            </PageBtn>
+            <PageBtn value="2" onClick={onChangePage}>
+              2
+            </PageBtn>
+            <PageBtn value="3" onClick={onChangePage}>
+              3
+            </PageBtn>
+            <PageBtn value="4" onClick={onChangePage}>
+              4
+            </PageBtn>
+            <PageBtn value="5" onClick={onChangePage}>
+              5
+            </PageBtn>
+            <PageBtn value="6" onClick={onChangePage}>
+              6
+            </PageBtn>
+          </PageBtnContainer>
+        </BtnContainer>
+      </MainBoarder>
     </MainContainer>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
-  return { testData: state.requestData.questionList };
+  return {
+    testData: state.requestData.questionList,
+    resultAnswer: state.userData.answers,
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

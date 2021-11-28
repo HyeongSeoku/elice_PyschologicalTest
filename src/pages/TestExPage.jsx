@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import api from "../apis/api";
+import ProgressBar from "../components/ProgressBar";
 import TestTemplate from "../components/TestTemplate";
 import { actionCreators } from "../store";
 
@@ -14,6 +15,43 @@ const TestContainer = styled.div`
   padding: 30px;
   justify-content: center;
   align-items: center;
+`;
+
+const TestBoarder = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  width: 800px;
+  border-radius: 8px;
+  padding: 20px;
+`;
+
+const TestDescribe = styled.div`
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 550px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #cccccc;
+  padding: 20px;
+`;
+
+const TestDesSub = styled.div`
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 5px;
+`;
+
+const HoverDesSub = styled.div`
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #ed6c47;
 `;
 
 const StyledLink = styled(Link)`
@@ -52,7 +90,6 @@ const TestPage = ({
   InitAnswer,
   testData,
   pageToggle,
-  InitTestPage,
 }) => {
   //store에 데이터 저장 부분
   useEffect(() => {
@@ -101,18 +138,28 @@ const TestPage = ({
   };
   return (
     <TestContainer>
-      <h2>{user.name}님의 테스트페이지</h2>
-      <h3>테스트 총 문항은 {testData.length - 1}개로 구성됩니다.</h3>
-      <div>두가지 보기 중 조금 더 가까운 쪽을 선택해주세요</div>
-      <div>
-        ❗ 페이지에 해당된 모든 문항을 완료하셔야 다음 문항으로 넘어 가실수
-        있습니다.
-      </div>
-      {/*테스트 템플릿이 들어갈 부분*/}
-      <TestTemplate data={[testData[0]]} />
-      <StyledLink to={`/testmain/`}>
-        <SubmitBtn disabled={pageToggle[0].disable}>다음</SubmitBtn>
-      </StyledLink>
+      <TestBoarder>
+        <ProgressBar />
+        <TestDescribe>
+          <h2>{user.name}님의 테스트페이지</h2>
+          <h3>테스트 총 문항은 {testData.length - 1}개로 구성됩니다.</h3>
+          <TestDesSub>
+            두가지 보기 중 조금 더 가까운 쪽을 선택해주세요
+          </TestDesSub>
+          <TestDesSub>
+            ❗ 페이지에 해당된 모든 문항을 완료하셔야 다음 문항으로 넘어 가실수
+            있습니다.
+          </TestDesSub>
+          <HoverDesSub>
+            설명이 필요하시면 물음표에 마우스를 올려보세요
+          </HoverDesSub>
+        </TestDescribe>
+        {/*테스트 템플릿이 들어갈 부분*/}
+        <TestTemplate data={[testData[0]]} />
+        <StyledLink to={`/testmain/`}>
+          <SubmitBtn disabled={pageToggle[0].disable}>다음</SubmitBtn>
+        </StyledLink>
+      </TestBoarder>
     </TestContainer>
   );
 };
